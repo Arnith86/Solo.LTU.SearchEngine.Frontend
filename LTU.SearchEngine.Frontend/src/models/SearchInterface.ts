@@ -11,12 +11,18 @@ export interface SearchResultItem {
 
 export interface SearchResponse {
     searchResults: SearchResultItem[];
-    currentPage: number; // FRQ-4002
-    pageSize: number;
-    totalResults: number;
-    totalPages: number;
+    metaData: PaginationMetaData;
     message: string; 
     ignoredTokens?: IgnoredToken[]
+}
+
+export interface PaginationMetaData{
+    currentPage: number;
+    hasNext: boolean;
+    hasPrevious: boolean;
+    pageSize: number;
+    totalItemCount: number;
+    totalPages: number;
 }
 
 export interface IgnoredToken {

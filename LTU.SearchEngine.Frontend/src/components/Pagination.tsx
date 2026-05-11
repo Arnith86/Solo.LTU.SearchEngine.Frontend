@@ -1,16 +1,13 @@
+import type { PaginationMetaData } from "../models/SearchInterface";
+
 interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
+  metaData: PaginationMetaData;
   onPageChange: (newPage: number) => void;
 }
 
-export const Pagination = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: PaginationProps) => {
+export const Pagination = ({ metaData, onPageChange,}: PaginationProps) => {
 
-  if (totalPages <= 1) return null;
+  if (metaData.totalPages <= 1) return null;
 
   return (
     <div
@@ -22,19 +19,19 @@ export const Pagination = ({
       }}
     >
       <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
+        onClick={() => onPageChange(metaData.currentPage - 1)}
+        disabled={!metaData.hasPrevious}
       >
         Previous
       </button>
 
       <span>
-        Page {currentPage} of {totalPages}
+        Page {metaData.currentPage} of {metaData.totalPages}
       </span>
 
       <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
+        onClick={() => onPageChange(metaData.currentPage + 1)}
+        disabled={!metaData.hasNext}
       >
         Next
       </button>
