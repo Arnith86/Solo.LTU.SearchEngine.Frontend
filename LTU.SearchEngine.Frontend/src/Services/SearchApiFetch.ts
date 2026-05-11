@@ -29,11 +29,10 @@ export const fetchFromApi = async (query: string, page: number = 0, language: st
     const params = new URLSearchParams({
         query: query,
         language: language,
-        // pageNumber: page.toString()
+        pageNumber: page.toString()
     });
  
     const url = `${BASE_URL}/search?${params}`;
-    
     const response = await fetch(url);
 
     if (!response.ok){
