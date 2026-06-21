@@ -1,13 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 
-const inputStyles: React.CSSProperties = {
-  flex: 1,
-  padding: "8px",
-  border: "2px solid #ccc",
-  outline: "none",
-  borderRadius: "4px",
-};
-
 interface SearchInputProps {
   onSearch: (query: string) => void;
   isLoading: boolean;
@@ -27,15 +19,15 @@ export const SearchInput = ({ onSearch, isLoading }: SearchInputProps) => {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto" }}>
-      <form onSubmit={handleSearch} style={{ display: "flex", gap: "8px" }}>
+    <div>
+      <form className="search-form" onSubmit={handleSearch}>
         <input
+          className="search-form-input"
           name="query-input"
           type="text"
           key={query}
           defaultValue={query}
           placeholder='Try "cats" AND "dogs"...'
-          style={inputStyles}
         />
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Searching..." : "Search"}
