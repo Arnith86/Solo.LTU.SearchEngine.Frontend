@@ -5,19 +5,11 @@ interface PaginationProps {
   onPageChange: (newPage: number) => void;
 }
 
-export const Pagination = ({ metaData, onPageChange,}: PaginationProps) => {
-
+export const Pagination = ({ metaData, onPageChange }: PaginationProps) => {
   if (metaData.totalPages <= 1) return null;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "15px",
-        alignItems: "center",
-        marginTop: "20px",
-      }}
-    >
+    <div className="pagination">
       <button
         onClick={() => onPageChange(metaData.currentPage - 1)}
         disabled={!metaData.hasPrevious}
