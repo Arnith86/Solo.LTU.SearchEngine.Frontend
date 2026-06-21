@@ -1,3 +1,5 @@
 /* Global styling for the entire application */
 @import url(./App.css);
 @import url(./index.css);
+
+@import url(../css/LanguageToggle.css);
