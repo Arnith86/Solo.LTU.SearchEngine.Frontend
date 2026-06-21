@@ -5,12 +5,10 @@ import { SearchResultList } from "../components/SearchResultList";
 import { Pagination } from "../components/Pagination";
 import { useLanguage } from "../hooks/useLanguage";
 
-
 export const SearchView = () => {
   const { executeSearch, searchData, isLoading, error, warning } = useSearch();
   const [submittedQuery, setSubmittedQuery] = useState("");
   const { currentLanguage } = useLanguage();
-
 
   const handleSearch = (query: string) => {
     setSubmittedQuery(query);
@@ -30,10 +28,13 @@ export const SearchView = () => {
 
       {/* Issue #12: Hantera noll resultat (FRQ-4003) */}
       {searchData && searchData.metaData.totalItemCount === 0 && (
-        <div className="no-results-container" style={{ marginTop: '20px', padding: '20px', backgroundColor: ' #3c4043;', borderRadius: '4px', border: '1px solid #ccc' }}>
+        <div className="no-results-container">
           <h3>No results found</h3>
-          <p>Your search for <strong>"{submittedQuery}"</strong> did not match any documents.</p>
-          <ul style={{ marginTop: '10px', paddingLeft: '20px' }}>
+          <p>
+            Your search for <strong>"{submittedQuery}"</strong> did not match
+            any documents.
+          </p>
+          <ul>
             <li>Make sure all words are spelled correctly.</li>
             <li>Try different keywords.</li>
             <li>Try more general keywords.</li>
@@ -43,10 +44,14 @@ export const SearchView = () => {
 
       {searchData && (
         <>
-          <p>Ignored common terms: {searchData.ignoredTokens?.map((term) => term.token).join(', ') || 'None'}</p>
+          <p>
+            Ignored common terms:{" "}
+            {searchData.ignoredTokens?.map((term) => term.token).join(", ") ||
+              "None"}
+          </p>
           <p>Found {searchData.metaData.totalItemCount} results</p>
           <small>{`Time taken: ${searchData.message}`}</small>
-          <SearchResultList searchResults = {searchData.searchResults} />
+          <SearchResultList searchResults={searchData.searchResults} />
           {
             <Pagination
               metaData={searchData.metaData}
