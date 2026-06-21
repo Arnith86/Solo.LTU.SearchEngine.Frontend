@@ -16,11 +16,11 @@ interface SearchInputProps {
 export const SearchInput = ({ onSearch, isLoading }: SearchInputProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
- 
+
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget); 
+    const formData = new FormData(e.currentTarget);
     const newQuery = formData.get("query-input") as string;
     setSearchParams({ query: newQuery });
     onSearch(newQuery);
