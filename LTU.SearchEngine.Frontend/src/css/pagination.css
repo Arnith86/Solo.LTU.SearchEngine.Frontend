@@ -5,3 +5,12 @@
   justify-content: center;
   margin-top: 20px;
 }
+
+.pagination-numbers button {
+  background-color: transparent;
+}
+
+.pagination-numbers button.active {
+  font-weight: bold;
+  border: 2px solid;
+}
