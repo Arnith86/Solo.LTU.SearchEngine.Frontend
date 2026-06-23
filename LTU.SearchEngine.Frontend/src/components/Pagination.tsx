@@ -6,12 +6,6 @@ interface PaginationProps {
   onPageChange: (newPage: number) => void;
 }
 
-export interface PaginationAction {
-  onNextPage: () => void;
-  onPreviousPage: () => void;
-  onPageSelect: (pageNumber: number) => void;
-}
-
 export const Pagination = ({ metaData, onPageChange }: PaginationProps) => {
   const pageNumbers = useCenteredPagination({
     currentPage: metaData.currentPage,
