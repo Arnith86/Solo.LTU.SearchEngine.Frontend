@@ -1,3 +1,4 @@
+import { useCenteredPagination } from "../hooks/useCenteredPagination";
 import type { PaginationMetaData } from "../models/SearchInterface";
 
 interface PaginationProps {
@@ -5,19 +6,17 @@ interface PaginationProps {
   onPageChange: (newPage: number) => void;
 }
 
-export const Pagination = ({ metaData, onPageChange,}: PaginationProps) => {
+export const Pagination = ({ metaData, onPageChange }: PaginationProps) => {
+  const pageNumbers = useCenteredPagination({
+    currentPage: metaData.currentPage,
+    totalPages: metaData.totalPages,
+    windowSize: 10,
+  });
 
   if (metaData.totalPages <= 1) return null;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "15px",
-        alignItems: "center",
-        marginTop: "20px",
-      }}
-    >
+    <div className="pagination">
       <button
         onClick={() => onPageChange(metaData.currentPage - 1)}
         disabled={!metaData.hasPrevious}
@@ -25,9 +24,17 @@ export const Pagination = ({ metaData, onPageChange,}: PaginationProps) => {
         Previous
       </button>
 
-      <span>
-        Page {metaData.currentPage} of {metaData.totalPages}
-      </span>
+      <div className="pagination-numbers">
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            onClick={() => onPageChange(pageNumber)}
+            className={pageNumber === metaData.currentPage ? "active" : ""}
+          >
+            {pageNumber}
+          </button>
+        ))}
+      </div>
 
       <button
         onClick={() => onPageChange(metaData.currentPage + 1)}
@@ -35,6 +42,10 @@ export const Pagination = ({ metaData, onPageChange,}: PaginationProps) => {
       >
         Next
       </button>
+
+      <span>
+        Page {metaData.currentPage} of {metaData.totalPages}
+      </span>
     </div>
   );
 };

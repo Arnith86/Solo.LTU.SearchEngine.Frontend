@@ -1,0 +1,7 @@
+/* Global styling for the entire application */
+@import url(./App.css);
+@import url(./index.css);
+
+@import url(../css/LanguageToggle.css);
+@import url(../css/SearchInput.css);
+@import url(../css/pagination.css);
